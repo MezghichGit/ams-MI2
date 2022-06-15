@@ -1,0 +1,18 @@
+server:
+  port: 9191
+  
+spring:
+  application:
+    name: AMS-GATEWAY-SERVICE
+  cloud:
+    gateway:
+      routes:
+        - id : PROVIDER-SERVICE
+          uri : lb://PROVIDER-SERVICE
+          predicates :
+            - Path= /providers/**
+            
+        - id : ARTICLE-SERVICE
+          uri : lb://ARTICLE-SERVICE
+          predicates :
+            - Path= /articles/**
