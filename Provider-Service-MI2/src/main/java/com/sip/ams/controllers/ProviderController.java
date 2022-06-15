@@ -3,6 +3,7 @@ package com.sip.ams.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ProviderController {
 	
+	@Value("${info}")
+	private String info;
 	@Autowired
 	ProviderService providerService;
 	
@@ -42,6 +45,13 @@ public class ProviderController {
 	{
 		log.info("Recherche du Provider avec succès depuis ProviderController");
 		return providerService.findProviderById(id);
+	}
+	
+	@GetMapping("/info")
+	public String getInfo()
+	{
+		log.info("Get info from Article Controller");
+		return "<h1 align=center>"+info+"</h1>";
 	}
 
 

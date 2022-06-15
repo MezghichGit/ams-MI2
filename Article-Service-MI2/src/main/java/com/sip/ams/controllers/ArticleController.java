@@ -2,6 +2,7 @@ package com.sip.ams.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,9 @@ public class ArticleController {
 	@Autowired
 	ArticleService articleService;
 	
+	@Value("${info}")
+	private String info;
+	
 	@PostMapping("/")
 	public Article saveArticle(@RequestBody Article article)
 	{
@@ -42,6 +46,13 @@ public class ArticleController {
 	{
 		log.info("Get article avec son provider depuis Article Controller");
 		return articleService.getArticleWithProvider(articleId);
+	}
+	
+	@GetMapping("/info")
+	public String getInfo()
+	{
+		log.info("Get info from Article Controller");
+		return "<h1 align=center>"+info+"</h1>";
 	}
 
 
